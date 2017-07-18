@@ -70,7 +70,7 @@ void SecondStep(String password){
 
     @Test(groups ="positive", dependsOnMethods = {"TestLog"}, description = "Log in with correct password.",priority = 2)
     void TestPas(){
-        SecondStep("flinta72299");
+        SecondStep("parol");
         Assert.assertFalse(IfIsPresent("input[name=\'password\']"));
 
     }
