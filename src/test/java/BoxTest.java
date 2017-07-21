@@ -1,21 +1,16 @@
-import org.openqa.selenium.Alert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import java.awt.*;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import static java.awt.event.KeyEvent.VK_TAB;
 
 /**
  * Created by User on 18.07.2017.
