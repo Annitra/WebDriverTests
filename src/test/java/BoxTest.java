@@ -78,8 +78,8 @@ public class BoxTest {
         System.out.println(testResult.isSuccess());
     }
 
-/*    @AfterTest
+   @AfterTest
     void AfterT()
     { driver.close();
-    }  */
+    }  
 }
