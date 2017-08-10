@@ -5,18 +5,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * Created by User on 18.07.2017.
  */
 public class BoxTest {
     WebDriver driver;
+    private TestRail trReport;
 
     void sleeppy(int sec){
         try {
@@ -37,7 +39,8 @@ public class BoxTest {
         driver.findElement(By.cssSelector("input[type=\'file\']")).sendKeys(file.getAbsolutePath());
     }
 
-    
+
+
     boolean IfIsPresent(String input)
     {
         try {
@@ -57,11 +60,16 @@ public class BoxTest {
         LoginToBox();
     }
 
+    @BeforeClass
+    protected void prepareTestRailRun() throws Exception {
+        trReport = new TestRail();
+        trReport.startRun(1, "DropBox - " + new SimpleDateFormat("dd.MM.yy HH:mm").format(new Date()));
+    }
 
-    @Test(description ="Test for uploading file to the box.com")
+    @Test(description ="3.Test for uploading file to the box.com")
     void UploadFile(){
 
-        UploadFile("D:\\Documents\\Desktop\\testingfileAnna.jpg");
+        UploadFile("C:\\Users\\User\\IdeaProjects\\FirstWebD\\testingfileAnna.jpg");
         sleeppy(5);
         Assert.assertTrue(IfIsPresent("li[data-name=\'testingfileAnna.jpg\']"));
 
@@ -71,10 +79,19 @@ public class BoxTest {
     void AfterM(ITestResult testResult){
         System.out.println(testResult.getMethod().getDescription());
         System.out.println(testResult.isSuccess());
+
+        String testDescription = testResult.getMethod().getDescription();
+        trReport.setResult(Integer.parseInt(testDescription.substring(0, testDescription.indexOf("."))), testResult.getStatus());
+    }
+
+
+    @AfterClass
+    protected void closeTestRailRun() throws Exception {
+        trReport.endRun();
     }
 
    @AfterTest
     void AfterT()
     { driver.close();
-    }  
+    }
 }

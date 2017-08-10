@@ -2,10 +2,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,9 +54,11 @@ void SecondStep(String password){
     Steps("input[name=\'password\']", password, "div[id=\'passwordNext\']" );
 }
     @BeforeTest
-    void setUp(){
+    void setUp() throws MalformedURLException{
         System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe"); //tegs <properties> in pom.xml
         driver = new ChromeDriver();
+
+      //  driver = new RemoteWebDriver(new URL("http://192.168.0.103"), new DesiredCapabilities());
         driver.get("https://www.google.com.ua/");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(By.id("gb_70")).click();
@@ -70,7 +77,7 @@ void SecondStep(String password){
 
     @Test(groups ="positive", dependsOnMethods = {"TestLog"}, description = "Log in with correct password.",priority = 2)
     void TestPas(){
-        SecondStep("parol");
+        SecondStep("flinta72299");
         Assert.assertFalse(IfIsPresent("input[name=\'password\']"));
 
     }

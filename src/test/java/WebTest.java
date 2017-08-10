@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 /**
  * Created by User on 09.07.2017.
  */
+
 public class WebTest {
    Web myWeb;
    int gettingNumber ;
